@@ -43,7 +43,6 @@ const validMoves = (m1t,m2t,m3t) => {
 
 }
 
-
 const validMove = move => move === ROCK || move === PAPER || move === SCISSORS;
 
 
@@ -94,28 +93,28 @@ const roundWinnerCalculator = (playerOneMoveType,playerOneMoveValue,playerTwoMov
 }
 
 // function to assign valid moves and values to the global variables
-const setPlayerMoves = (player,moveOneType,moveOneValue,moveTwoType,moveTwoValue,moveThreeType,moveThreeValue) => {
+const setPlayerMoves = (player,m1t,m1v,m2t,m2v,m3t,m3v) => {
 
 // first check if the input is valid for the move type and values
-if (isValid(moveOneType,moveTwoType,moveThreeType,moveOneValue,moveTwoValue,moveThreeValue)){
+if (isValid(m1t,m2t,m3t,m1v,m2v,m3v)){
 
   switch (player) {
 
       case P1:
-        playerOneMoveOneType = moveOneType;
-        playerOneMoveOneValue = moveOneValue;
-        playerOneMoveTwoType = moveTwoType;
-        playerOneMoveTwoValue = moveTwoValue;
-        playerOneMoveThreeType = moveThreeType;
-        playerOneMoveThreeValue = moveThreeValue;
+        playerOneMoveOneType = m1t;
+        playerOneMoveOneValue = m1v;
+        playerOneMoveTwoType = m2t;
+        playerOneMoveTwoValue = m2v;
+        playerOneMoveThreeType = m3t;
+        playerOneMoveThreeValue = m3v;
         break;
       case P2:
-        playerTwoMoveOneType = moveOneType;
-        playerTwoMoveOneValue = moveOneValue;
-        playerTwoMoveTwoType = moveTwoType;
-        playerTwoMoveTwoValue = moveTwoValue;
-        playerTwoMoveThreeType = moveThreeType;
-        playerTwoMoveThreeValue = moveThreeValue;
+        playerTwoMoveOneType = m1t;
+        playerTwoMoveOneValue = m1v;
+        playerTwoMoveTwoType = m2t;
+        playerTwoMoveTwoValue = m2v;
+        playerTwoMoveThreeType = m3t;
+        playerTwoMoveThreeValue = m3v;
         break;
 
   }
