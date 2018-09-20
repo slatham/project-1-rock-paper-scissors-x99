@@ -14,10 +14,9 @@ let playerTwoMoveTwoValue;
 let playerTwoMoveThreeType;
 let playerTwoMoveThreeValue;
 
-/*
-    Set up some constants so I'm not typing shed loads
-    and to make sure I type the in the correct case
-*/
+// Set up some constants so I'm not typing shed loads
+// and to make sure I type the in the correct case
+
 const ROCK = 'rock';
 const PAPER = 'paper';
 const SCISSORS = 'scissors';
@@ -30,26 +29,26 @@ const isValid = (m1t,m2t,m3t,m1v,m2v,m3v) => !totalOver99(m1v,m2v,m3v) &&
                                               valuesOver1(m1v,m2v,m3v) &&
                                               validMoves(m1t,m2t,m3t);
 
-
-
 // helper function to test if the 3 moves are over 99 in total
 const totalOver99 = (m1v,m2v,m3v) => m1v + m2v + m3v > 99;
 // helper function to test if each 3 moves are greater than 1
 const valuesOver1 = (m1v,m2v,m3v) => m1v >= 1 && m2v >= 1 && m3v >=1;
 // helper function to test if we're supplied with  a valid move types
-const validMoves = (moveOneType,moveTwoType,moveThreeType) => {
-
-  // check for undefined variables first
-  if (typeof moveOneType === 'string' && typeof moveTwoType === 'string' && typeof moveThreeType === 'string') {
-
-    return  (moveOneType === ROCK || moveOneType === PAPER || moveOneType === SCISSORS) &&
-            (moveTwoType === ROCK || moveTwoType === PAPER || moveTwoType === SCISSORS) &&
-            (moveThreeType === ROCK || moveThreeType === PAPER || moveThreeType ===SCISSORS);
+const validMoves = (m1t,m2t,m3t) => {
+  // check for undefined variables first,, if not bail out
+  if (typeof m1t === 'string' && typeof m2t === 'string' && typeof m3t === 'string') {
+    // next check each move is validity
+      return validMove(m1t) && validMove(m2t) && validMove(m3t);
   }
 
-  return false
-
 }
+
+
+const validMove = move => move === ROCK || move === PAPER || move === SCISSORS;
+
+
+
+
 
 const roundWinnerCalculator = (playerOneMoveType,playerOneMoveValue,playerTwoMoveType,playerTwoMoveValue) => {
 
