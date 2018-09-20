@@ -239,11 +239,11 @@ const setComputerMoves = () => {
   // limit each player gets is 99
   let limit = 99;
   // let computer choose a random number from 1 to 97
-  moveOneValue = Math.floor(1 + Math.random()*limit - 2); // 1 + becuase e don't want a zero value, -2 becuase we need to assign rnd2&3 atleast 1
+  moveOneValue = Math.floor(1 + Math.random()*(limit - 2)); // 1 + becuase e don't want a zero value, -2 becuase we need to assign rnd2&3 atleast 1
   // minus the value accounting for round one
   limit -= moveOneValue;
   // now choose another random number from 1 to number of points left
-  moveTwoValue = Math.floor(1 + Math.random()*limit - 1);
+  moveTwoValue = Math.floor(1 + Math.random()*(limit - 1));
   // assign the remainder to the final move
   moveThreeValue = limit -= moveTwoValue;
 
@@ -251,6 +251,8 @@ const setComputerMoves = () => {
   moveOneType = getComputerMovetype(Math.floor(Math.random()*2));
   moveTwoType = getComputerMovetype(Math.floor(Math.random()*2));
   moveThreeType = getComputerMovetype(Math.floor(Math.random()*2));
+
+
 
   setPlayerMoves (P2,moveOneType,moveOneValue,moveTwoType,moveTwoValue,moveThreeType,moveThreeValue);
 
