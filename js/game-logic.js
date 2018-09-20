@@ -14,7 +14,8 @@ let playerTwoMoveTwoValue;
 let playerTwoMoveThreeType;
 let playerTwoMoveThreeValue;
 
-/*  Set up some constants so I'm not typing shed loads
+/*
+    Set up some constants so I'm not typing shed loads
     and to make sure I type the in the correct case
 */
 const ROCK = 'rock';
@@ -25,18 +26,18 @@ const P2 = 'Player Two'
 const TIE = 'Tie';
 
 // function to test overall validity
-const isValid = (moveOneType,moveTwoType,moveThreeType,moveOneValue,moveTwoValue,moveThreeValue) => {
+const isValid = (m1t,m2t,m3t,m1v,m2v,m3v) => {
 
-  return !totalOver99(moveOneValue,moveTwoValue,moveThreeValue) &&
-  valuesOver1(moveOneValue,moveTwoValue,moveThreeValue) &&
-  validMoves(moveOneType,moveTwoType,moveThreeType);
+  return !totalOver99(m1v,m2v,m3v) &&
+  valuesOver1(m1v,m2v,m3v) &&
+  validMoves(m1t,m2t,m3t);
 
 }
 
 // helper function to test if the 3 moves are over 99 in total
-const totalOver99 = (moveOneValue,moveTwoValue,moveThreeValue) => moveOneValue + moveTwoValue + moveThreeValue > 99;
+const totalOver99 = (m1v,m2v,m3v) => m1v + m2v + m3v > 99;
 // helper function to test if each 3 moves are greater than 1
-const valuesOver1 = (moveOneValue,moveTwoValue,moveThreeValue) => moveOneValue >= 1 && moveTwoValue >= 1 && moveThreeValue >=1;
+const valuesOver1 = (m1v,m2v,m3v) => m1v >= 1 && m2v >= 1 && m3v >=1;
 // helper function to test if we're supplied with  a valid move types
 const validMoves = (moveOneType,moveTwoType,moveThreeType) => {
 
@@ -235,12 +236,14 @@ const getComputerMovetype = (number) => {
 const setComputerMoves = () => {
   debugger;
 
-
+  // limit each player gets is 99
   let limit = 99;
+  // let computer choose a random number from 1 to 97
   moveOneValue = Math.floor(1 + Math.random()*limit - 2); // 1 + becuase e don't want a zero value, -2 becuase we need to assign rnd2&3 atleast 1
-  // minus the score accounting for round one
+  // minus the value accounting for round one
   limit -= moveOneValue;
-  moveTwoValue = Math.floor(1 + Math.random()*limit);
+  // now choose another random number from 1 to number of points left
+  moveTwoValue = Math.floor(1 + Math.random()*limit - 1);
   // assign the remainder to the final move
   moveThreeValue = limit -= moveTwoValue;
 
