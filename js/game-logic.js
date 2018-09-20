@@ -205,16 +205,17 @@ const getGameWinner = () => {
 
 }
 
+// helper function to choose the compter move from a random number
 const getComputerMovetype = (number) => {
 
   switch (number) {
 
     case 0:
-      return 'Rock';
+      return 'rock';
     case 1:
-      return 'Paper';
+      return 'paper';
     case 2:
-      return 'Scissors'
+      return 'scissors'
 
   }
 
@@ -223,9 +224,20 @@ const getComputerMovetype = (number) => {
 const setComputerMoves = () => {
   debugger;
 
+
+  let limit = 99;
+  moveOneValue = Math.floor(1 + Math.random()*limit - 2); // 1 + becuase e don't want a zero value, -2 becuase we need to assign rnd2&3 atleast 1
+  // minus the score accounting for round one
+  limit -= moveOneValue;
+  moveTwoValue = Math.floor(1 + Math.random()*limit);
+  // assign the remainder to the final move
+  moveThreeValue = limit -= moveTwoValue;
+
   // randomly choose moveOneType
-  playerTwoMoveOneType = getComputerMovetype(Math.floor(Math.random()*2));
-  playerTwoMoveTwoType = getComputerMovetype(Math.floor(Math.random()*2));
-  playerTwoMoveThreeType = getComputerMovetype(Math.floor(Math.random()*2));
+  moveOneType = getComputerMovetype(Math.floor(Math.random()*2));
+  moveTwoType = getComputerMovetype(Math.floor(Math.random()*2));
+  moveThreeType = getComputerMovetype(Math.floor(Math.random()*2));
+
+  setPlayerMoves ('Player Two',moveOneType,moveOneValue,moveTwoType,moveTwoValue,moveThreeType,moveThreeValue);
 
 }
