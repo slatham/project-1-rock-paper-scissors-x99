@@ -26,13 +26,11 @@ const P2 = 'Player Two'
 const TIE = 'Tie';
 
 // function to test overall validity
-const isValid = (m1t,m2t,m3t,m1v,m2v,m3v) => {
+const isValid = (m1t,m2t,m3t,m1v,m2v,m3v) => !totalOver99(m1v,m2v,m3v) &&
+                                              valuesOver1(m1v,m2v,m3v) &&
+                                              validMoves(m1t,m2t,m3t);
 
-  return !totalOver99(m1v,m2v,m3v) &&
-  valuesOver1(m1v,m2v,m3v) &&
-  validMoves(m1t,m2t,m3t);
 
-}
 
 // helper function to test if the 3 moves are over 99 in total
 const totalOver99 = (m1v,m2v,m3v) => m1v + m2v + m3v > 99;
