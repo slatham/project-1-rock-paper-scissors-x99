@@ -1,5 +1,6 @@
 // All code should be written in this file.
 
+// Define the global variables
 let playerOneMoveOneType;
 let playerOneMoveOneValue;
 let playerOneMoveTwoType;
@@ -12,6 +13,16 @@ let playerTwoMoveTwoType;
 let playerTwoMoveTwoValue;
 let playerTwoMoveThreeType;
 let playerTwoMoveThreeValue;
+
+/*  Set up some constants so I'm not typing shed loads
+    and to make sure I type the in the correct case
+*/
+const ROCK = 'rock';
+const PAPER = 'paper';
+const SCISSORS = 'scissors';
+const P1 = 'Player One';
+const P2 = 'Player Two'
+const TIE = 'Tie';
 
 // function to test overall validity
 const isValid = (moveOneType,moveTwoType,moveThreeType,moveOneValue,moveTwoValue,moveThreeValue) => {
@@ -32,9 +43,9 @@ const validMoves = (moveOneType,moveTwoType,moveThreeType) => {
   // check for undefined variables first
   if (typeof moveOneType === 'string' && typeof moveTwoType === 'string' && typeof moveThreeType === 'string') {
 
-    return  (moveOneType === 'rock' || moveOneType === 'paper' || moveOneType === 'scissors') &&
-            (moveTwoType === 'rock' || moveTwoType === 'paper' || moveTwoType === 'scissors') &&
-            (moveThreeType === 'rock' || moveThreeType === 'paper' || moveThreeType ==='scissors');
+    return  (moveOneType === ROCK || moveOneType === PAPER || moveOneType === SCISSORS) &&
+            (moveTwoType === ROCK || moveTwoType === PAPER || moveTwoType === SCISSORS) &&
+            (moveThreeType === ROCK || moveThreeType === PAPER || moveThreeType ===SCISSORS);
   }
 
   return false
@@ -49,35 +60,35 @@ const roundWinnerCalculator = (playerOneMoveType,playerOneMoveValue,playerTwoMov
   }
 
   // check who wins
-  if (playerOneMoveType === 'rock' && playerTwoMoveType === 'scissors') {
-    return 'Player One'
+  if (playerOneMoveType === ROCK && playerTwoMoveType === SCISSORS) {
+    return P1
   }
-  if (playerOneMoveType === 'rock' && playerTwoMoveType === 'paper') {
-    return 'Player Two'
+  if (playerOneMoveType === ROCK && playerTwoMoveType === PAPER) {
+    return P2
   }
-  if (playerOneMoveType === 'scissors' && playerTwoMoveType === 'rock') {
-    return 'Player Two'
+  if (playerOneMoveType === SCISSORS && playerTwoMoveType === ROCK) {
+    return P2
   }
-  if (playerOneMoveType === 'scissors' && playerTwoMoveType === 'paper') {
-    return 'Player One'
+  if (playerOneMoveType === SCISSORS && playerTwoMoveType === PAPER) {
+    return P1
   }
-  if (playerOneMoveType === 'paper' && playerTwoMoveType === 'rock') {
-    return 'Player One'
+  if (playerOneMoveType === PAPER && playerTwoMoveType === ROCK) {
+    return P1
   }
-  if (playerOneMoveType === 'paper' && playerTwoMoveType === 'scissors') {
-    return 'Player Two'
+  if (playerOneMoveType === PAPER && playerTwoMoveType === SCISSORS) {
+    return P2
   }
   //resolve a tie
   if (playerOneMoveType === playerTwoMoveType){
 
       if (playerOneMoveValue > playerTwoMoveValue){
-        return 'Player One'
+        return P1
       }
       if (playerOneMoveValue < playerTwoMoveValue){
-        return 'Player Two'
+        return P2
       }
       if (playerOneMoveValue === playerTwoMoveValue) {
-        return 'Tie'
+        return TIE
       }
 
   }
@@ -92,7 +103,7 @@ if (isValid(moveOneType,moveTwoType,moveThreeType,moveOneValue,moveTwoValue,move
 
   switch (player) {
 
-      case 'Player One':
+      case P1:
         playerOneMoveOneType = moveOneType;
         playerOneMoveOneValue = moveOneValue;
         playerOneMoveTwoType = moveTwoType;
@@ -100,7 +111,7 @@ if (isValid(moveOneType,moveTwoType,moveThreeType,moveOneValue,moveTwoValue,move
         playerOneMoveThreeType = moveThreeType;
         playerOneMoveThreeValue = moveThreeValue;
         break;
-      case 'Player Two':
+      case P2:
         playerTwoMoveOneType = moveOneType;
         playerTwoMoveOneValue = moveOneValue;
         playerTwoMoveTwoType = moveTwoType;
@@ -143,13 +154,13 @@ const getGameWinner = () => {
 
     // get round 1 results
     switch (getRoundWinner(1)) {
-      case 'Player One':
+      case P1:
         playerOnePoints++;
         break;
-      case 'Player Two':
+      case P2:
         playerTwoPoints++;
         break;
-      case 'Tie':
+      case TIE:
         playerOnePoints++;
         playerTwoPoints++;
         break;
@@ -159,13 +170,13 @@ const getGameWinner = () => {
 
     // get round 1 results
     switch (getRoundWinner(2)){
-      case 'Player One':
+      case P1:
         playerOnePoints++;
         break;
-      case 'Player Two':
+      case P2:
         playerTwoPoints++;
         break;
-      case 'Tie':
+      case TIE:
         playerOnePoints++;
         playerTwoPoints++;
         break;
@@ -176,13 +187,13 @@ const getGameWinner = () => {
 
     // get round 1 results
     switch (getRoundWinner(3)){
-      case 'Player One':
+      case P1:
         playerOnePoints++;
         break;
-      case 'Player Two':
+      case P2:
         playerTwoPoints++;
         break;
-      case 'Tie':
+      case TIE:
         playerOnePoints++;
         playerTwoPoints++;
         break;
@@ -192,15 +203,15 @@ const getGameWinner = () => {
 
     // decide the winner
     if (playerOnePoints > playerTwoPoints) {
-      return 'Player One';
+      return P1;
     }
 
     if (playerOnePoints < playerTwoPoints) {
-      return 'Player Two';
+      return P2;
     }
 
     if (playerOnePoints === playerTwoPoints) {
-      return 'Tie';
+      return TIE;
     }
 
 }
@@ -211,11 +222,11 @@ const getComputerMovetype = (number) => {
   switch (number) {
 
     case 0:
-      return 'rock';
+      return ROCK;
     case 1:
-      return 'paper';
+      return PAPER;
     case 2:
-      return 'scissors'
+      return SCISSORS
 
   }
 
@@ -238,6 +249,6 @@ const setComputerMoves = () => {
   moveTwoType = getComputerMovetype(Math.floor(Math.random()*2));
   moveThreeType = getComputerMovetype(Math.floor(Math.random()*2));
 
-  setPlayerMoves ('Player Two',moveOneType,moveOneValue,moveTwoType,moveTwoValue,moveThreeType,moveThreeValue);
+  setPlayerMoves (P2,moveOneType,moveOneValue,moveTwoType,moveTwoValue,moveThreeType,moveThreeValue);
 
 }
