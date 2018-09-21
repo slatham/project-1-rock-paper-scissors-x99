@@ -13,7 +13,7 @@ let playerTwoMoveThreeType;
 let playerTwoMoveThreeValue;
 
 // Set up some constants so I'm not typing shed loads
-// and to make sure I type the in the correct case
+// and to make sure I type them in the correct case
 const ROCK = 'rock';
 const PAPER = 'paper';
 const SCISSORS = 'scissors';
@@ -21,7 +21,7 @@ const P1 = 'Player One';
 const P2 = 'Player Two';
 const TIE = 'Tie';
 
-// function to test overall validity
+// helper function to test overall validity of all moves and values
 const isValid = (m1t,m2t,m3t,m1v,m2v,m3v) => !totalOver99(m1v,m2v,m3v) &&
                                               valuesOver1(m1v,m2v,m3v) &&
                                               validMoves(m1t,m2t,m3t);
@@ -30,14 +30,13 @@ const isValid = (m1t,m2t,m3t,m1v,m2v,m3v) => !totalOver99(m1v,m2v,m3v) &&
 const totalOver99 = (m1v,m2v,m3v) => m1v + m2v + m3v > 99;
 // helper function to test if each 3 moves are greater than 1
 const valuesOver1 = (m1v,m2v,m3v) => m1v >= 1 && m2v >= 1 && m3v >=1;
-// helper function to test if we're supplied with  a valid move types
+// helper function to test if we're supplied with valid move types
 const validMoves = (m1t,m2t,m3t) => {
-  // check for undefined variables first,, if not bail out
+  // check for undefined variables first, if so bail out!
   if (typeof m1t === 'string' && typeof m2t === 'string' && typeof m3t === 'string') {
-    // next check each move is validity
+      // next check each move for validity
       return validMove(m1t) && validMove(m2t) && validMove(m3t);
   }
-
 }
 
 // helper function to test each individual move for validity
@@ -50,31 +49,30 @@ const roundWinnerCalculator = (p1t,p1v,p2t,p2v) => {
   if (!p1t || !p1v || !p2t || !p2v) {
     return null
   }
-
-  //resolve a tie
+  // first resolve a tie
   if (p1t === p2t){
     if (p1v === p2v) {
       return TIE
     }
+    // if p1 value for round is gtr than p2's, P1 is winner - else P2 is.
     return  p1v > p2v ? P1 : P2;
   }
-
+  // check who wins when it isn't a tie
   switch (p1t) {
     case ROCK: return p2t === SCISSORS ? P1 : P2;
     case PAPER: return p2t === ROCK ? P1 : P2;
     case SCISSORS : return p2t === PAPER ? P1 : P2;
   }
-
 }
 
-// function to assign valid moves and valuep1t === SCISSORS && p2t === ROCKs to the global variables
+// function to assign valid moves to the constants defined at the start
 const setPlayerMoves = (player,m1t,m1v,m2t,m2v,m3t,m3v) => {
 
 // first check if the input is valid for the move type and values
 if (isValid(m1t,m2t,m3t,m1v,m2v,m3v)){
-
+  // if valid, assing the values and types to the constant variables
+  // for player 1 and 2
   switch (player) {
-
       case P1:
         playerOneMoveOneType = m1t;
         playerOneMoveOneValue = m1v;
@@ -91,38 +89,41 @@ if (isValid(m1t,m2t,m3t,m1v,m2v,m3v)){
         playerTwoMoveThreeType = m3t;
         playerTwoMoveThreeValue = m3v;
         break;
-
   }
-
-
+}
 }
 
-
-}
-
+// function to determine the winner of each round
 const getRoundWinner = round => {
-
+    // for each round (1-3) see who wins by passing all the variables to
+    // the helpter function
     switch (round) {
-
         case 1:
-          return roundWinnerCalculator(playerOneMoveOneType,playerOneMoveOneValue,playerTwoMoveOneType,playerTwoMoveOneValue);
-
+          return roundWinnerCalculator(playerOneMoveOneType,
+            playerOneMoveOneValue,playerTwoMoveOneType,playerTwoMoveOneValue);
         case 2:
-          return roundWinnerCalculator(playerOneMoveTwoType,playerOneMoveTwoValue,playerTwoMoveTwoType,playerTwoMoveTwoValue);
-
+          return roundWinnerCalculator(playerOneMoveTwoType,
+            playerOneMoveTwoValue,playerTwoMoveTwoType,playerTwoMoveTwoValue);
         case 3:
-          return roundWinnerCalculator(playerOneMoveThreeType,playerOneMoveThreeValue,playerTwoMoveThreeType,playerTwoMoveThreeValue);
+          return roundWinnerCalculator(playerOneMoveThreeType,
+            playerOneMoveThreeValue,playerTwoMoveThreeType,playerTwoMoveThreeValue);
         default:
           return null
     }
 }
 
+// function to determine the overall game winner
 const getGameWinner = () => {
-
-
+    // set up variables to hold the running
+    // score for each player
     let playerOnePoints = 0;
     let playerTwoPoints = 0;
 
+    /*
+      For each round run the helper function to determine the winner,
+      that passes back the winner name, based on that we increment
+      that player's scores.
+    */
 
     // get round 1 results
     switch (getRoundWinner(1)) {
@@ -140,7 +141,7 @@ const getGameWinner = () => {
         return null
     }
 
-    // get round 1 results
+    // get round 2 results
     switch (getRoundWinner(2)){
       case P1:
         playerOnePoints++;
@@ -154,10 +155,9 @@ const getGameWinner = () => {
         break;
       default:
         return null
-
     }
 
-    // get round 1 results
+    // get round 3 results
     switch (getRoundWinner(3)){
       case P1:
         playerOnePoints++;
@@ -210,7 +210,7 @@ const setComputerMoves = () => {
   // limit each player gets is 99
   let limit = 99;
   // let computer choose a random number from 1 to 97
-  moveOneValue = Math.floor(1 + Math.random()*(limit - 2)); // 1 + becuase e don't want a zero value, -2 becuase we need to assign rnd2&3 atleast 1
+  moveOneValue = Math.floor(1 + Math.random()*(limit - 2));
   // minus the value accounting for round one
   limit -= moveOneValue;
   // now choose another random number from 1 to number of points left
@@ -225,6 +225,7 @@ const setComputerMoves = () => {
 
 
 
-  setPlayerMoves (P2,moveOneType,moveOneValue,moveTwoType,moveTwoValue,moveThreeType,moveThreeValue);
+  setPlayerMoves (P2,moveOneType,moveOneValue,moveTwoType,
+                  moveTwoValue,moveThreeType,moveThreeValue);
 
 }
