@@ -182,34 +182,30 @@ const getGameWinner = () => {
     return playerOnePoints > playerTwoPoints ? P1 : P2;
 }
 
-// helper function to choose the compter move from a random number
+// helper function to choose the computer move from a random number
 const getComputerMovetype = (number) => {
 
   switch (number) {
-
-    case 0:
-      return ROCK;
-    case 1:
-      return PAPER;
-    case 2:
-      return SCISSORS
-
+    case 0: return ROCK;
+    case 1: return PAPER;
+    case 2: return SCISSORS
   }
-
 }
 
+// function to rndomly set the computer moves
 const setComputerMoves = () => {
-  debugger;
 
-  // limit each player gets is 99
+  // limit - each player gets is 99
   let limit = 99;
   // let computer choose a random number from 1 to 97
+  // we need to hold back at least 2 so round 2 & 3 can be
+  // at least 1.
   moveOneValue = Math.floor(1 + Math.random()*(limit - 2));
-  // minus the value accounting for round one
+  // minus the value used for rnd1 - remainer we use for rnd2
   limit -= moveOneValue;
-  // now choose another random number from 1 to number of points left
+  // now choose another random number from 1 to number of points left in limit
   moveTwoValue = Math.floor(1 + Math.random()*(limit - 1));
-  // assign the remainder to the final move
+  // finally, assign the remainder to the final move
   moveThreeValue = limit -= moveTwoValue;
 
   // randomly choose moveOneType
@@ -217,8 +213,7 @@ const setComputerMoves = () => {
   moveTwoType = getComputerMovetype(Math.floor(Math.random()*2));
   moveThreeType = getComputerMovetype(Math.floor(Math.random()*2));
 
-
-
+  // set the computer's moves as player 2
   setPlayerMoves (P2,moveOneType,moveOneValue,moveTwoType,
                   moveTwoValue,moveThreeType,moveThreeValue);
 
