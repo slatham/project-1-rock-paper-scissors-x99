@@ -173,19 +173,13 @@ const getGameWinner = () => {
         return null;
     }
 
-    // decide the winner
-    if (playerOnePoints > playerTwoPoints) {
-      return P1;
-    }
-
-    if (playerOnePoints < playerTwoPoints) {
-      return P2;
-    }
-
+    // check for a tie
     if (playerOnePoints === playerTwoPoints) {
       return TIE;
     }
 
+    // not tie so decide the winner
+    return playerOnePoints > playerTwoPoints ? P1 : P2;
 }
 
 // helper function to choose the compter move from a random number
