@@ -1,5 +1,3 @@
-// All code should be written in this file.
-
 // Define the global variables
 let playerOneMoveOneType;
 let playerOneMoveOneValue;
@@ -16,7 +14,6 @@ let playerTwoMoveThreeValue;
 
 // Set up some constants so I'm not typing shed loads
 // and to make sure I type the in the correct case
-
 const ROCK = 'rock';
 const PAPER = 'paper';
 const SCISSORS = 'scissors';
@@ -46,9 +43,9 @@ const validMoves = (m1t,m2t,m3t) => {
 // helper function to test each individual move for validity
 const validMove = move => move === ROCK || move === PAPER || move === SCISSORS;
 
-
+// helper function to calculate round winners
 const roundWinnerCalculator = (p1t,p1v,p2t,p2v) => {
-debugger;
+
   //check all values have been supplied
   if (!p1t || !p1v || !p2t || !p2v) {
     return null
@@ -56,15 +53,10 @@ debugger;
 
   //resolve a tie
   if (p1t === p2t){
-      if (p1v > p2v){
-        return P1
-      }
-      if (p1v < p2v){
-        return P2
-      }
-      if (p1v === p2v) {
-        return TIE
-      }
+    if (p1v === p2v) {
+      return TIE
+    }
+    return  p1v > p2v ? P1 : P2;
   }
 
   switch (p1t) {
