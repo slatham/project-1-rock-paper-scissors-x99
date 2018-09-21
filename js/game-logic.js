@@ -43,48 +43,46 @@ const validMoves = (m1t,m2t,m3t) => {
 
 }
 
+// helper function to test each individual move for validity
 const validMove = move => move === ROCK || move === PAPER || move === SCISSORS;
 
 
-
-
-
-const roundWinnerCalculator = (playerOneMoveType,playerOneMoveValue,playerTwoMoveType,playerTwoMoveValue) => {
+const roundWinnerCalculator = (p1t,p1v,p2t,p2v) => {
 
   //check all values have been supplied
-  if (!playerOneMoveType || !playerOneMoveValue || !playerTwoMoveType || !playerTwoMoveValue) {
+  if (!p1t || !p1v || !p2t || !p2v) {
     return null
   }
 
   // check who wins
-  if (playerOneMoveType === ROCK && playerTwoMoveType === SCISSORS) {
+  if (p1t === ROCK && p2t === SCISSORS) {
     return P1
   }
-  if (playerOneMoveType === ROCK && playerTwoMoveType === PAPER) {
+  if (p1t === ROCK && p2t === PAPER) {
     return P2
   }
-  if (playerOneMoveType === SCISSORS && playerTwoMoveType === ROCK) {
+  if (p1t === SCISSORS && p2t === ROCK) {
     return P2
   }
-  if (playerOneMoveType === SCISSORS && playerTwoMoveType === PAPER) {
+  if (p1t === SCISSORS && p2t === PAPER) {
     return P1
   }
-  if (playerOneMoveType === PAPER && playerTwoMoveType === ROCK) {
+  if (p1t === PAPER && p2t === ROCK) {
     return P1
   }
-  if (playerOneMoveType === PAPER && playerTwoMoveType === SCISSORS) {
+  if (p1t === PAPER && p2t === SCISSORS) {
     return P2
   }
   //resolve a tie
-  if (playerOneMoveType === playerTwoMoveType){
+  if (p1t === p2t){
 
-      if (playerOneMoveValue > playerTwoMoveValue){
+      if (p1v > p2v){
         return P1
       }
-      if (playerOneMoveValue < playerTwoMoveValue){
+      if (p1v < p2v){
         return P2
       }
-      if (playerOneMoveValue === playerTwoMoveValue) {
+      if (p1v === p2v) {
         return TIE
       }
 
