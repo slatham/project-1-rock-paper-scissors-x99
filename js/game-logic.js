@@ -21,7 +21,7 @@ const ROCK = 'rock';
 const PAPER = 'paper';
 const SCISSORS = 'scissors';
 const P1 = 'Player One';
-const P2 = 'Player Two'
+const P2 = 'Player Two';
 const TIE = 'Tie';
 
 // function to test overall validity
@@ -48,34 +48,14 @@ const validMove = move => move === ROCK || move === PAPER || move === SCISSORS;
 
 
 const roundWinnerCalculator = (p1t,p1v,p2t,p2v) => {
-
+debugger;
   //check all values have been supplied
   if (!p1t || !p1v || !p2t || !p2v) {
     return null
   }
 
-  // check who wins
-  if (p1t === ROCK && p2t === SCISSORS) {
-    return P1
-  }
-  if (p1t === ROCK && p2t === PAPER) {
-    return P2
-  }
-  if (p1t === SCISSORS && p2t === ROCK) {
-    return P2
-  }
-  if (p1t === SCISSORS && p2t === PAPER) {
-    return P1
-  }
-  if (p1t === PAPER && p2t === ROCK) {
-    return P1
-  }
-  if (p1t === PAPER && p2t === SCISSORS) {
-    return P2
-  }
   //resolve a tie
   if (p1t === p2t){
-
       if (p1v > p2v){
         return P1
       }
@@ -85,12 +65,17 @@ const roundWinnerCalculator = (p1t,p1v,p2t,p2v) => {
       if (p1v === p2v) {
         return TIE
       }
+  }
 
+  switch (p1t) {
+    case ROCK: return p2t === SCISSORS ? P1 : P2;
+    case PAPER: return p2t === ROCK ? P1 : P2;
+    case SCISSORS : return p2t === PAPER ? P1 : P2;
   }
 
 }
 
-// function to assign valid moves and values to the global variables
+// function to assign valid moves and valuep1t === SCISSORS && p2t === ROCKs to the global variables
 const setPlayerMoves = (player,m1t,m1v,m2t,m2v,m3t,m3v) => {
 
 // first check if the input is valid for the move type and values
